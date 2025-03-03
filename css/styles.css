@@ -1,0 +1,314 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #000000;
+    overflow: hidden;
+}
+
+#audioPlayer {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: transparent;
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 15px;
+    color: white;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+}
+
+.control-button {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 8px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    transition: all 0.2s ease;
+}
+
+.control-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+}
+
+.control-button:active {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(0.95);
+}
+
+.control-button svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    transition: transform 0.2s ease;
+}
+
+#fileInput {
+    display: none;
+}
+
+#uploadLabel {
+    color: white;
+    border: 1px solid white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+}
+
+#uploadLabel:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+#uploadLabel:active {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.time-display {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    opacity: 0.9;
+    margin-left: 10px;
+    font-variant-numeric: tabular-nums;
+}
+
+.time-separator {
+    margin: 0 4px;
+    opacity: 0.6;
+}
+
+.menu-button {
+    margin-right: 10px;
+    position: relative;
+    z-index: 1001;
+    transition: transform 0.3s ease;
+}
+
+.menu-button.active {
+    transform: rotate(90deg);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.track-list {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    right: 0;
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    width: 300px;
+    height: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    opacity: 0;
+    transform: translateY(10px);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+}
+
+.track-list.open {
+    height: auto;
+    max-height: 400px;
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    pointer-events: all;
+}
+
+.track-list-header {
+    padding: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.track-list-content {
+    max-height: 350px;
+    overflow-y: auto;
+    padding: 5px 0;
+}
+
+.track-item {
+    padding: 12px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    border-left: 3px solid transparent;
+    position: relative;
+    margin: 2px 0;
+}
+
+.track-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-left-color: rgba(255, 255, 255, 0.3);
+}
+
+.track-item.active {
+    background: rgba(255, 255, 255, 0.15);
+    border-left-color: rgba(255, 255, 255, 1);
+}
+
+/* Update current track display */
+.current-track-info {
+    position: relative;
+    font-size: 12px;
+    color: white;
+    opacity: 0.7;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+    transition: opacity 0.3s ease;
+    margin: 0 10px;
+    bottom: 0;
+}
+
+.current-track-info.playing {
+    opacity: 1;
+}
+
+/* Update track name styles */
+.track-name {
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 10px;
+    transition: color 0.2s ease;
+}
+
+.track-item:hover .track-name {
+    color: rgba(255, 255, 255, 1);
+}
+
+.track-item.active .track-name {
+    font-weight: 500;
+}
+
+/* Play indicator improvements */
+.track-item.active .track-name::before {
+    content: '▶';
+    margin-right: 8px;
+    font-size: 10px;
+    display: inline-block;
+    transform: scale(1.2);
+    opacity: 0.8;
+}
+
+/* Scrollbar styling */
+.track-list-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.track-list-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.track-list-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+.track-list-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.upload-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.upload-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.upload-button:active {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(0.95);
+}
+
+.upload-button svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+}
+
+/* Add upload feedback animation */
+@keyframes uploadSuccess {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.upload-success {
+    animation: uploadSuccess 0.3s ease;
+}
+
+.uploaded-icon {
+    opacity: 0.5;
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.uploaded-icon svg {
+    fill: currentColor;
+}
+
+/* Update globe container styles for iframe */
+#globeContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    pointer-events: all;  /* Enable interaction with the globe */
+}
+
+canvas {
+    display: block;
+}
+
+/* Ensure audio player stays on top */
+#audioPlayer {
+    z-index: 1000;
+    position: relative;
+} 

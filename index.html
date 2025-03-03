@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MP3 Player with Three.js</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+</head>
+<body>
+    <div id="globeContainer"></div>
+    <div id="audioPlayer">
+        <button id="menuButton" class="control-button menu-button">
+            <svg viewBox="0 0 24 24">
+                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+            </svg>
+        </button>
+        <div id="trackList" class="track-list">
+            <div class="track-list-header">
+                Music Library
+                <label class="upload-button" for="fileInput">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 16h6v-6h4l-7-7-7 7h4v6zm-4 2h14v2H5v-2z"/>
+                    </svg>
+                    <span>Upload</span>
+                </label>
+            </div>
+            <div class="track-list-content"></div>
+        </div>
+        <input type="file" id="fileInput" accept=".mp3" multiple>
+        <button id="playButton" class="control-button">
+            <svg viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+            </svg>
+        </button>
+        <button id="pauseButton" class="control-button">
+            <svg viewBox="0 0 24 24">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+            </svg>
+        </button>
+        <div class="current-track-info">Hello</div>
+        <span class="time-display">
+            <span id="currentTime">0:00</span>
+            <span class="time-separator">/</span>
+            <span id="duration">0:00</span>
+        </span>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <script src="js/Globe.js"></script>
+    <script src="js/AudioVisualizer.js"></script>
+    <script src="js/TouchDesignerConnector.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html> 

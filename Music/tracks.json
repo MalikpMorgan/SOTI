@@ -1,0 +1,12 @@
+{
+    "tracks": [
+        {
+            "name": "Track 1.mp3",
+            "path": "music/tracks/Track 1.mp3"
+        },
+        {
+            "name": "Track 2.mp3",
+            "path": "music/tracks/Track 2.mp3"
+        }
+    ]
+} 
