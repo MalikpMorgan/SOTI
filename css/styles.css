@@ -306,9 +306,3 @@ body {
 canvas {
     display: block;
 }
-
-/* Ensure audio player stays on top */
-#audioPlayer {
-    z-index: 1000;
-    position: relative;
-} 
