@@ -97,7 +97,7 @@ class App {
         try {
             // Create a new track object
             const track = {
-                name: file.name.replace('.mp3', ''),
+                name: file.name.replace('.mp3', 'm4a'),
                 path: URL.createObjectURL(file)
             };
 
