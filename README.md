@@ -1,15 +1,10 @@
-# Project S.O.T.I. (Sound of The Internet) 😎
+# Project S.O.T.I. 😎
 
-An immersive audio-visual player that combines web technologies with TouchDesigner to create a unique music listening experience.
+An immersive audio-visual player with Three.js, p5.js, and TouchDesigner.
 
 ## Overview
 
 Project S.O.T.I. is a modern web-based music player that features:
-- Interactive 3D globe visualization
-- Real-time audio visualization
-- TouchDesigner integration
-- Sleek, minimal interface
-- Drag and drop music upload support
 
 ## Technologies
 
@@ -31,11 +26,6 @@ Project S.O.T.I. is a modern web-based music player that features:
   - Next/Previous track
   - Track progress display
   - Volume control
-
-- **Visual Elements**
-  - Interactive 3D globe
-  - Real-time audio reactive visuals
-  - Smooth animations and transitions
 
 - **TouchDesigner Integration**
   - Real-time audio data streaming
@@ -59,4 +49,3 @@ Project S.O.T.I. is a modern web-based music player that features:
 - **Escape**: Close menu
 - **Mouse**: Interact with globe visualization
 
-## Project Structure 
